@@ -1,5 +1,5 @@
 {
-  "Name": "react-topcoat",
+  "name": "react-topcoat",
   "version": "0.1.0",
   "author": "Arne Martin Aurlien <am@aurlien.net>",
   "description": "React components for topcoat elements",
