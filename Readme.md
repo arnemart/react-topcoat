@@ -5,6 +5,11 @@ A collection of [React][1] components for [Topcoat][2].
 
 See test.js for sample usage.
 
+Demo
+----
+
+Go here: http://arnemart.github.io/react-topcoat/
+
 Installation
 ------------
 
