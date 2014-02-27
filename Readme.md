@@ -10,6 +10,8 @@ Demo
 
 Go here: http://arnemart.github.io/react-topcoat/
 
+Or check out https://github.com/arnemart/hamburger-basement for a project using it.
+
 Installation
 ------------
 
