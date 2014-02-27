@@ -1,6 +1,6 @@
 {
   "name": "react-topcoat",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Arne Martin Aurlien <am@aurlien.net>",
   "description": "React components for topcoat elements",
   "main": "./react-topcoat",
@@ -17,7 +17,7 @@
     "react": "~0.9.0"
   },
   "scripts": {
-    "test": "watchify -vo test-built.js test.js && open test.html"
+    "watch": "watchify -vo test-built.js test.js"
   },
   "license": "MIT"
 }
