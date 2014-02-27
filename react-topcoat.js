@@ -5,7 +5,9 @@
         React = React || root.React;
         var d = React.DOM;
 
-        function classNames(baseClass, additionalClasses) {
+        var tc = {};
+
+        tc._classNames = function(baseClass, additionalClasses) {
             if (additionalClasses && additionalClasses.join) {
                 return baseClass + ' ' + additionalClasses.join(' ');
             } else if (typeof additionalClasses === 'string') {
@@ -13,9 +15,9 @@
             } else {
                 return baseClass;
             }
-        }
+        };
 
-        function map(list, fn) {
+        tc._map = function(list, fn) {
             var result = [];
             for (var i in list) {
                 if (list.hasOwnProperty(i)) {
@@ -23,9 +25,9 @@
                 }
             }
             return result;
-        }
+        };
 
-        function merge(obj, anotherObj) {
+        tc._merge = function(obj, anotherObj) {
             if (!obj) {
                 obj = {};
             }
@@ -38,9 +40,7 @@
                 }
             }
             return obj;
-        }
-
-        var tc = {};
+        };
 
         /*
          * className
@@ -51,13 +51,13 @@
             render: function() {
                 var buttonClass = (this.props.type === 'large' ? 'topcoat-button-bar__button--large' : 'topcoat-button-bar__button');
                 return d.div(
-                    { className: classNames('topcoat-button-bar', this.props.className) },
-                    map(this.props.items, function(item) {
+                    { className: tc._classNames('topcoat-button-bar', this.props.className) },
+                    tc._map(this.props.items, function(item) {
                         return d.div(
                             { className: 'topcoat-button-bar__item' },
                             d.button(
-                                merge({
-                                    className: classNames(buttonClass, item.className),
+                                tc._merge({
+                                    className: tc._classNames(buttonClass, item.className),
                                     onClick: item.onClick,
                                     disabled: item.disabled
                                 }, item.events),
@@ -80,8 +80,8 @@
         tc.button = React.createClass({
             render: function() {
                 return d.button(
-                    merge({
-                        className: classNames('topcoat-button' + (this.props.type ? '--' + this.props.type : ''), this.props.className),
+                    tc._merge({
+                        className: tc._classNames('topcoat-button' + (this.props.type ? '--' + this.props.type : ''), this.props.className),
                         onClick: this.props.onClick,
                         disabled: this.props.disabled
                     }, this.props.events),
@@ -110,9 +110,9 @@
             },
             render: function() {
                 return d.label(
-                    { className: classNames('topcoat-checkbox', this.props.className) },
+                    { className: tc._classNames('topcoat-checkbox', this.props.className) },
                     (this.props.labelPosition === 'left' ? [this.props.label, ' '] : null),
-                    d.input(merge({
+                    d.input(tc._merge({
                         type: 'checkbox',
                         name: this.props.name,
                         id: this.props.id,
@@ -149,13 +149,13 @@
         tc.iconButton = React.createClass({
             render: function() {
                 return d.button(
-                    merge({
-                        className: classNames('topcoat-icon-button' + (this.props.type ? '--' + this.props.type : ''), this.props.className),
+                    tc._merge({
+                        className: tc._classNames('topcoat-icon-button' + (this.props.type ? '--' + this.props.type : ''), this.props.className),
                         onClick: this.props.onClick,
                         disabled: this.props.disabled
                     }, this.props.events),
                     d.span(
-                        { className: classNames((this.props.type && this.props.type.match('large') ? 'topcoat-icon--large' : 'topcoat-icon') + (this.props.which ? ' topcoat-icon--' + this.props.which : ''), this.props.iconClassName) }
+                        { className: tc._classNames((this.props.type && this.props.type.match('large') ? 'topcoat-icon--large' : 'topcoat-icon') + (this.props.which ? ' topcoat-icon--' + this.props.which : ''), this.props.iconClassName) }
                     )
                 );
             }
@@ -170,14 +170,14 @@
             render: function() {
                 var itemKey = 0;
                 return d.div(
-                    { className: classNames('topcoat-list', this.props.className) },
+                    { className: tc._classNames('topcoat-list', this.props.className) },
                     (this.props.header ? d.h3({ className: 'topcoat-list__header' }, this.props.header) : null),
                     d.ul(
                         { className: 'topcoat-list__container' },
-                        map(this.props.items, function(item) {
+                        tc._map(this.props.items, function(item) {
                             return d.li(
-                                merge({
-                                    className: classNames('topcoat-list__item', item.className),
+                                tc._merge({
+                                    className: tc._classNames('topcoat-list__item', item.className),
                                     key: itemKey++
                                 }, item.events),
                                 item.content
@@ -197,7 +197,7 @@
         tc.navigationBar = React.createClass({
             render: function() {
                 return d.div(
-                    { className: classNames('topcoat-navigation-bar', this.props.className) },
+                    { className: tc._classNames('topcoat-navigation-bar', this.props.className) },
                     d.div(
                         { className: 'topcoat-navigation-bar__item left quarter' },
                         this.props.leftButton
@@ -225,7 +225,7 @@
         tc.notification = React.createClass({
             render: function() {
                 return d.span(
-                    merge({ className: classNames('topcoat-notification', this.props.className )}, this.props.events),
+                    tc._merge({ className: tc._classNames('topcoat-notification', this.props.className )}, this.props.events),
                     this.props.content
                 );
             }
@@ -251,9 +251,9 @@
             },
             render: function() {
                 return d.label(
-                    { className: classNames('topcoat-radio-button', this.props.className) },
+                    { className: tc._classNames('topcoat-radio-button', this.props.className) },
                     (this.props.labelPosition === 'left' ? [this.props.label, ' '] : null),
-                    d.input(merge({
+                    d.input(tc._merge({
                         type: 'radio',
                         name: this.props.name,
                         id: this.props.id,
@@ -281,7 +281,7 @@
          */
         tc.range = React.createClass({
             render: function() {
-                return d.input(merge({
+                return d.input(tc._merge({
                     type: 'range',
                     min: this.props.min,
                     max: this.props.max,
@@ -289,7 +289,7 @@
                     defaultValue: this.props.value,
                     name: this.props.name,
                     id: this.props.id,
-                    className: classNames('topcoat-range', this.props.className),
+                    className: tc._classNames('topcoat-range', this.props.className),
                     disabled: this.props.disabled
                 }, this.props.events));
             }
@@ -307,12 +307,12 @@
          */
         tc.searchInput = React.createClass({
             render: function() {
-                return d.input(merge({
+                return d.input(tc._merge({
                     type: 'search',
                     placeholder: this.props.placeholder,
                     name: this.props.name,
                     id: this.props.id,
-                    className: classNames('topcoat-search-input' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
+                    className: tc._classNames('topcoat-search-input' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
                     disabled: this.props.disabled,
                     defaultValue: this.props.value
                 }, this.props.events));
@@ -332,13 +332,13 @@
         tc.switch = React.createClass({
             render: function() {
                 return d.label(
-                    { className: classNames('topcoat-switch', this.props.className) },
-                    d.input(merge({
+                    { className: tc._classNames('topcoat-switch', this.props.className) },
+                    d.input(tc._merge({
                         type: 'checkbox',
                         name: this.props.name,
                         defaultChecked: this.props.checked,
                         id: this.props.id,
-                        className: classNames('topcoat-switch__input', this.props.inputClassName),
+                        className: tc._classNames('topcoat-switch__input', this.props.inputClassName),
                         disabled: this.props.disabled
                     }, this.props.events)),
                     d.div({ className: 'topcoat-switch__toggle' })
@@ -362,19 +362,19 @@
                 console.log('render tab bar');
                 var self = this;
                 return d.div(
-                    { className: classNames('topcoat-tab-bar', this.props.className) },
-                    map(this.props.items, function(item) {
+                    { className: tc._classNames('topcoat-tab-bar', this.props.className) },
+                    tc._map(this.props.items, function(item) {
                         return d.label(
-                            { className: classNames('topcoat-tab-bar__item', item.className) },
-                            d.input(merge({
+                            { className: tc._classNames('topcoat-tab-bar__item', item.className) },
+                            d.input(tc._merge({
                                 type: 'radio',
                                 name: self.props.name,
                                 defaultChecked: item.checked,
                                 id: item.id,
-                                className: classNames('', item.inputClassName)
-                            }, merge(self.props.events, item.events))),
+                                className: tc._classNames('', item.inputClassName)
+                            }, tc._merge(self.props.events, item.events))),
                             d.button(
-                                { className: classNames('topcoat-tab-bar__button', item.buttonClassName) },
+                                { className: tc._classNames('topcoat-tab-bar__button', item.buttonClassName) },
                                 item.content
                             )
                         );
@@ -396,12 +396,12 @@
          */
         tc.textInput = React.createClass({
             render: function() {
-                return d.input(merge({
+                return d.input(tc._merge({
                     type: 'text',
                     placeholder: this.props.placeholder,
                     name: this.props.name,
                     id: this.props.id,
-                    className: classNames('topcoat-text-input' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
+                    className: tc._classNames('topcoat-text-input' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
                     disabled: this.props.disabled,
                     defaultValue: this.props.value,
                     pattern: this.props.pattern
@@ -424,8 +424,8 @@
         tc.textArea = React.createClass({
             render: function() {
                 return d.textarea(
-                    merge({
-                        className: classNames('topcoat-textarea' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
+                    tc._merge({
+                        className: tc._classNames('topcoat-textarea' + (this.props.type === 'large' ? '--large' : ''), this.props.className),
                         name: this.props.name,
                         id: this.props.id,
                         rows: this.props.rows,
