@@ -70,12 +70,8 @@
             },
             render: function() {
                 var input = this.transferPropsTo(d.input({
-                    type: 'checkbox',
-                    defaultValue: this.props.value,
-                    defaultChecked: this.props.checked
+                    type: 'checkbox'
                 }));
-                input.props.value = null;
-                input.props.checked = null;
                 return d.label(
                     { className: 'topcoat-checkbox' },
                     (this.props.labelPosition === 'left' ? [this.props.label, ' '] : null),
@@ -198,11 +194,7 @@
             render: function() {
                 var input = this.transferPropsTo(d.input({
                     type: 'radio',
-                    defaultChecked: this.props.checked,
-                    defaultValue: this.props.value
                 }));
-                input.props.value = null;
-                input.props.checked = null;
                 return d.label(
                     { className: 'topcoat-radio-button' },
                     (this.props.labelPosition === 'left' ? [this.props.label, ' '] : null),
@@ -218,13 +210,10 @@
          */
         tc.range = React.createClass({
             render: function() {
-                var range = this.transferPropsTo(d.input({
+                return this.transferPropsTo(d.input({
                     type: 'range',
-                    defaultValue: this.props.value,
                     className: 'topcoat-range'
                 }));
-                range.props.value = null;
-                return range;
             }
         });
 
@@ -235,13 +224,10 @@
          */
         tc.searchInput = React.createClass({
             render: function() {
-                var input = this.transferPropsTo(d.input({
+                return this.transferPropsTo(d.input({
                     type: 'search',
-                    className: 'topcoat-search-input' + (this.props.type === 'large' ? '--large' : ''),
-                    defaultValue: this.props.value
+                    className: 'topcoat-search-input' + (this.props.type === 'large' ? '--large' : '')
                 }));
-                input.props.value = null;
-                return input;
             }
         });
 
@@ -252,10 +238,8 @@
             render: function() {
                 var input = this.transferPropsTo(d.input({
                     type: 'checkbox',
-                    className: 'topcoat-switch__input',
-                    defaultValue: this.props.value
+                    className: 'topcoat-switch__input'
                 }));
-                input.props.value = null;
                 return d.label(
                     { className: 'topcoat-switch' },
                     input,
@@ -303,32 +287,25 @@
          */
         tc.textInput = React.createClass({
             render: function() {
-                var input = this.transferPropsTo(d.input({
+                return this.transferPropsTo(d.input({
                     type: 'text',
-                    className: 'topcoat-text-input' + (this.props.type === 'large' ? '--large' : ''),
-                    defaultValue: this.props.value
+                    className: 'topcoat-text-input' + (this.props.type === 'large' ? '--large' : '')
                 }));
-                input.props.value = null;
-                return input;
             }
         });
 
         /*
          * Text area
          *
-         * value
          * type (large)
          */
         tc.textArea = React.createClass({
             render: function() {
-                var textarea = this.transferPropsTo(d.textarea(
+                return this.transferPropsTo(d.textarea(
                     {
-                        className: 'topcoat-textarea' + (this.props.type === 'large' ? '--large' : ''),
-                        defaultValue: this.props.value
+                        className: 'topcoat-textarea' + (this.props.type === 'large' ? '--large' : '')
                     }
                 ));
-                textarea.props.value = null;
-                return textarea;
             }
         });
 
