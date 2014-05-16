@@ -1,6 +1,6 @@
 {
   "name": "react-topcoat",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "author": "Arne Martin Aurlien <am@aurlien.net>",
   "description": "React components for topcoat elements",
   "main": "./react-topcoat",
@@ -10,11 +10,11 @@
     "topcoat"
   ],
   "devDependencies": {
-    "watchify": "~0.6.1"
+    "watchify": "~0.10.1"
   },
   "dependencies": {
     "topcoat": "~0.7.5",
-    "react": "~0.9.0"
+    "react": "~0.10.0"
   },
   "scripts": {
     "watch": "watchify -vo test-built.js test.js"
